@@ -32,6 +32,11 @@ inline fun <T, E, U> KResult<T, E>.map(op: (T) -> U): KResult<U, E> = when(this)
     is Ok -> ok(op(value))
 }
 
+inline fun <T, E, U> KResult<T, E>.mapErr(op: (E) -> U): KResult<T, U> = when(this){
+    is Err -> err(op(error))
+    is Ok -> ok(this)
+}
+
 inline fun <T, E, U> KResult<T, E>.andThen(op: (T) -> KResult<U, E>): KResult<U, E> = when(this){
     is Err -> err(this)
     is Ok -> op(value)
