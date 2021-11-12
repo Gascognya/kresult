@@ -1,3 +1,5 @@
+import java.util.*
+
 sealed interface KResult<T, E>{
     fun bool(): Boolean = this is Ok
 
